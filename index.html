@@ -2,65 +2,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>AR with Start and Spawn</title>
+    <title>Camera Test</title>
     <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aframe-ar@1.8.2/dist/aframe-ar.min.js"></script>
-    <style>
-      #overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.8);
-        color: white;
-        z-index: 10;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-      }
-      #spawnButton {
-        position: fixed;
-        top: 10px;
-        left: 10px;
-        z-index: 5;
-        display: none;
-      }
-    </style>
+    <script src="https://rawcdn.githack.com/AR-js-org/AR.js/3.4.4/aframe/build/aframe-ar.min.js"></script>
   </head>
   <body style="margin: 0; overflow: hidden;">
-    <div id="overlay">
-      <h2>Welcome to AR</h2>
-      <button onclick="startAR()">Start AR</button>
-    </div>
-
-    <button id="spawnButton" onclick="spawnCube()">Spawn Cube</button>
-
-    <a-scene
-      embedded
-      arjs="sourceType: webcam; debugUIEnabled: false;"
-      renderer="logarithmicDepthBuffer: true;"
-    >
-      <a-camera position="0 0 0" look-controls-enabled="false"></a-camera>
+    <a-scene embedded arjs>
+      <a-entity camera></a-entity>
     </a-scene>
-
-    <script>
-      function startAR() {
-        document.getElementById("overlay").style.display = "none";
-        document.getElementById("spawnButton").style.display = "block";
-      }
-
-      function spawnCube() {
-        const scene = document.querySelector("a-scene");
-        const box = document.createElement("a-box");
-        box.setAttribute("position", "0 0 -1"); // 1 meter in front
-        box.setAttribute("color", "red");
-        box.setAttribute("depth", "0.3");
-        box.setAttribute("height", "0.3");
-        box.setAttribute("width", "0.3");
-        scene.appendChild(box);
-      }
-    </script>
   </body>
 </html>
