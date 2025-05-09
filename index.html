@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>AR.js - Spawn Cube</title>
+    <title>AR.js - Fixed Cube</title>
     <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
     <style>
@@ -24,19 +24,28 @@
     </div>
 
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+      <!-- AR Camera Entity -->
       <a-entity camera></a-entity>
+
+      <!-- This anchor point holds the cube in place within the AR world -->
+      <a-entity id="spawn-point" position="0 0 -3">
+        <a-box position="0 0 0" color="red" depth="0.3" height="0.3" width="0.3"></a-box>
+      </a-entity>
     </a-scene>
 
     <script>
       function spawnCube() {
-        const scene = document.querySelector("a-scene");
+        // Access the spawn point and add the cube to the world
+        const spawnPoint = document.querySelector("#spawn-point");
         const cube = document.createElement("a-box");
-        cube.setAttribute("position", "0 0 -1");
-        cube.setAttribute("color", "red");
+        cube.setAttribute("position", "0 0 0"); // Cube in the same position as spawn-point
+        cube.setAttribute("color", "blue");
         cube.setAttribute("depth", "0.3");
         cube.setAttribute("height", "0.3");
         cube.setAttribute("width", "0.3");
-        scene.appendChild(cube);
+
+        // Append the cube inside the AR scene, making it static in the world
+        spawnPoint.appendChild(cube);
       }
     </script>
   </body>
